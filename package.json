@@ -51,5 +51,14 @@
   },
   "peerDependencies": {
     "react": ">=0.14 || ^0.14.0-alpha"
-  }
+  },
+  "npmName": "react-slick",
+  "npmFileMap": [
+    {
+      "basePath": "/src/",
+      "files": [
+        "*.js"
+      ]
+    }
+  ],
 }
