@@ -7,12 +7,14 @@ class Dots extends Component {
     className: PropTypes.string,
     currentSlide: PropTypes.number,
     slideCount: PropTypes.number,
-    handleSlideShift: PropTypes.func
+    handleSlideShift: PropTypes.func,
+    style: PropTypes.object,
   }
 
   render() {
-    const { className, slideCount, currentSlide } = this.props;
+    const { className, slideCount, currentSlide, style } = this.props;
     const dotStyle = { display: 'flex', justifyContent: 'center'};
+    const mergedStyle = Object.assign({}, dotStyle, style);
 
     const dots = range(slideCount).map((x, i) => {
       const isActive = i === currentSlide;
@@ -29,9 +31,8 @@ class Dots extends Component {
         <div className={isActive ? 'active' : ''} style={style} key={i} />
       );
     });
-
     return (
-      <div style={dotStyle} className={className ? className : 'slick-dots'} >
+      <div style={mergedStyle} className={className ? className : 'slick-dots'} >
         {dots}
       </div>
     );

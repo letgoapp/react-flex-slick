@@ -8,102 +8,46 @@ class App extends Component {
 
   render() {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
-        <div>
-          <h2>Non Infinite</h2>
-          <NonInfinite width={580} height={150} />
-        </div>
-        <div>
-          <h2>Infinite</h2>
-          <Infinite width={580} height={150} />
-        </div>
-        <div>
-          <h2>Custom arrows</h2>
-          <CustomArrows width={580} height={150} />
-        </div>
-        <div>
-          <h2>Control Play (will autoPlay after 5s)</h2>
-          <ControlPlay width={580} height={150} />
-        </div>
-        <div>
-          <h2>Set slide to show (will show the 6th slide after 5s)</h2>
-          <SetSlide width={580} height={150} />
-        </div>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}} >
+          <CustomArrows />
       </div>
     );
   }
 }
 
 const slideStyle = {
-  width: 540,
-  height: 125,
-  backgroundColor: 'slateblue',
+  width: '100%',
+  backgroundColor: 'red',
   color: 'white',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center'
 };
 
-class NonInfinite extends Component {
-
-  render() {
-    return (
-      <Slider>
-        <PrevArrow activeClassName="non-infinite-left--active"
-                   inactiveClassName="non-infinite-left--inactive" />
-        <Slides {...this.props}>
-          <div style={slideStyle}><h1>1</h1></div>
-          <div style={slideStyle}><h1>2</h1></div>
-          <div style={slideStyle}><h1>3</h1></div>
-          <div style={slideStyle}><h1>4</h1></div>
-          <div style={slideStyle}><h1>5</h1></div>
-          <div style={slideStyle}><h1>6</h1></div>
-        </Slides>
-        <NextArrow activeClassName="non-infinite-right--active"
-                    inactiveClassName="non-infinite-right--inactive" />
-        <Dots />
-      </Slider>
-    );
-  }
-}
-
-class Infinite extends Component {
-
-  render() {
-    return (
-      <Slider infinite swipe draggable >
-        <PrevArrow />
-        <Slides {...this.props}  >
-          <div style={slideStyle}><h1>1</h1></div>
-          <div style={slideStyle}><h1>2</h1></div>
-          <div style={slideStyle}><h1>3</h1></div>
-          <div style={slideStyle}><h1>4</h1></div>
-          <div style={slideStyle}><h1>5</h1></div>
-          <div style={slideStyle}><h1>6</h1></div>
-        </Slides>
-        <NextArrow />
-        <Dots />
-      </Slider>
-    );
-  }
-}
 
 class CustomArrows extends Component {
 
   render() {
     return (
-      <Slider infinite swipe draggable >
-        <button>Prev</button>
-        <Slides {...this.props}>
-          <div style={slideStyle}><h1>1</h1></div>
-          <div style={slideStyle}><h1>2</h1></div>
-          <div style={slideStyle}><h1>3</h1></div>
-          <div style={slideStyle}><h1>4</h1></div>
-          <div style={slideStyle}><h1>5</h1></div>
-          <div style={slideStyle}><h1>6</h1></div>
-        </Slides>
-        <button>Next</button>
-      </Slider>
+      <div style={{backgroundColor: '#555', width: '60%' }}>
+        <Slider vertical swipe draggable >
+          <button style={{display: 'none'}}>Prev</button>
+          <Slides {...this.props}>
+            <div style={Object.assign({}, slideStyle, {height: '260px'})}><h1>1</h1></div>
+            <div style={Object.assign({}, slideStyle, {height: '520px'})}><h1>2</h1></div>
+            <div style={Object.assign({}, slideStyle, {height: '180px'})}><h1>3</h1></div>
+            <div style={Object.assign({}, slideStyle, {height: '330px'})}><h1>4</h1></div>
+            <div style={Object.assign({}, slideStyle, {height: '642px'})}><h1>5</h1></div>
+            <div style={Object.assign({}, slideStyle, {height: '488px'})}><h1>6</h1></div>
+          </Slides>
+          <button style={{display: 'none'}}>Next</button>
+          <Dots style={{
+              postion: 'absolute',
+              top: 0,
+              left: 0,
+            }} />
+        </Slider>
+      </div>
     );
   }
 }
@@ -127,24 +71,25 @@ class ControlPlay extends Component {
 
   render() {
     return (
-      <Slider infinite swipe draggable autoPlay={this.state.playing} >
-        <button>Prev</button>
-        <Slides {...this.props}>
-          <div style={slideStyle}><h1>1</h1></div>
-          <div style={slideStyle}><h1>2</h1></div>
-          <div style={slideStyle}><h1>3</h1></div>
-          <div style={slideStyle}><h1>4</h1></div>
-          <div style={slideStyle}><h1>5</h1></div>
-          <div style={slideStyle}><h1>6</h1></div>
-        </Slides>
-        <button>Next</button>
-      </Slider>
+        <Slider infinite swipe draggable autoPlay={this.state.playing} >
+          <button>Prev</button>
+          <Slides {...this.props}>
+            <div style={slideStyle}><h1>1</h1></div>
+            <div style={slideStyle}><h1>2</h1></div>
+            <div style={slideStyle}><h1>3</h1></div>
+            <div style={slideStyle}><h1>4</h1></div>
+            <div style={slideStyle}><h1>5</h1></div>
+            <div style={slideStyle}><h1>6</h1></div>
+          </Slides>
+          <button>Next</button>
+          <Dots />
+        </Slider>
     );
   }
 }
 
 class SetSlide extends Component {
-  
+
   constructor(props) {
     super(props);
     this.state = { currentSlide: 0 };
