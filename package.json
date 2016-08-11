@@ -1,6 +1,6 @@
 {
   "name": "react-flex-slick",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "Slick carousel using Flexbox",
   "main": "./lib/index.js",
   "scripts": {
