@@ -1,22 +1,22 @@
 import React, { Component, PropTypes, Children, cloneElement } from 'react';
 
-class Page extends Component {
-  static propTypes = {
-    children: PropTypes.any,
-    className: PropTypes.string,
-    pageStyle: PropTypes.any
-  }
 
-  render() {
-    const { pageStyle, className } = this.props;
+const Page = (props) => {
+  const { pageStyle, className } = props;
 
-    return (
-      <div className={className} style={pageStyle}>
-          {this.props.children}
-      </div>
-    );
-  }
-}
+  return (
+    <div className={className} style={pageStyle}>
+        {props.children}
+    </div>
+  );
+};
+
+Page.propTypes = {
+  children: PropTypes.any,
+  className: PropTypes.string,
+  pageStyle: PropTypes.any
+};
+
 
 // TODO Possible PERF OPTIMIZATION remove translateXOffset and translateYOffset from
 // here and do imperative DOM operations (translate) inside Slider.
@@ -58,15 +58,15 @@ class Track extends Component {
     });
   }
 
-  shouldComponentUpdate(nextProps) {
-    const { swipe, draggable } = this.props;
-
-    if (swipe === false && draggable === false) {
-      return this.state.previousSlide !== nextProps.currentSlide;
-    }
-
-    return true;
-  }
+  // shouldComponentUpdate(nextProps) {
+  //   const { swipe, draggable } = this.props;
+  //
+  //   if (swipe === false && draggable === false) {
+  //     return this.state.previousSlide !== nextProps.currentSlide;
+  //   }
+  //
+  //   return true;
+  // }
 
   componentWillUpdate() {
     if (this.props.beforeChange !== undefined) {
@@ -82,9 +82,14 @@ class Track extends Component {
   }
 
   computeTrackStyle() {
-    const { vertical, currentSlide, infinite,
-            translateXOffset, translateYOffset,
-            transitionSpeed, transitionTimingFn } = this.props;
+    const { vertical,
+            currentSlide,
+            infinite,
+            translateXOffset,
+            translateYOffset,
+            transitionSpeed,
+            transitionTimingFn
+          } = this.props;
     const slideCount = Children.count(this.props.children);
     const totalCount = slideCount + (infinite === true ? 2 : 0);
     const { previousSlide } = this.state;
@@ -149,12 +154,12 @@ class Track extends Component {
       </Page>
     );
 
-    const preSlides = slideCount === 1 || infinite === false ? null :
+    const preSlides = !(slideCount === 1 || infinite === false) &&
       <Page pageStyle={pageStyle} className={pageClass} pre >
         {cloneElement(this.props.children[slideCount - 1], { key: -1 })}
       </Page>;
 
-    const postSlides = slideCount === 1 || infinite === false ? null :
+    const postSlides = !(slideCount === 1 || infinite === false) &&
       <Page pageStyle={pageStyle} className={pageClass} post >
         {cloneElement(this.props.children[0], { key: totalCount })}
       </Page>;
@@ -171,7 +176,6 @@ class Track extends Component {
 
 class Slides extends Component {
   static propTypes = {
-    children: PropTypes.any,
     width: PropTypes.number,
     height: PropTypes.number,
     currentSlide: PropTypes.number,
@@ -202,7 +206,7 @@ class Slides extends Component {
   }
 
   render() {
-    const { width, height, children,
+    const { width, height,
       onMouseDown, onMouseMove, onMouseUp, onMouseLeave,
       onTouchStart, onTouchMove, onTouchEnd, onTouchCancel, ...props } = this.props;
 
@@ -216,18 +220,18 @@ class Slides extends Component {
     };
 
     return (
-      <div style={containerStyle}
-           onMouseDown={onMouseDown}
-           onMouseMove={onMouseMove}
-           onMouseUp={onMouseUp}
-           onMouseLeave={onMouseLeave}
-           onTouchStart={onTouchStart}
-           onTouchMove={onTouchMove}
-           onTouchEnd={onTouchEnd}
-           onTouchCancel={onTouchCancel} >
-        <Track {...props} >
-          {this.props.children}
-        </Track>
+      <div
+        style={containerStyle}
+        onMouseDown={onMouseDown}
+        onMouseMove={onMouseMove}
+        onMouseUp={onMouseUp}
+        onMouseLeave={onMouseLeave}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+        onTouchCancel={onTouchCancel}
+      >
+        <Track {...props} />
       </div>
     );
   }

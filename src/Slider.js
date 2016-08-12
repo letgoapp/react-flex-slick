@@ -1,6 +1,6 @@
 import React, { Component, PropTypes, cloneElement, Children } from 'react';
-import { swipeDirection, swipeDistance } from './util.js';
-import { SWIPE_UP, SWIPE_DOWN, SWIPE_RIGHT, SWIPE_LEFT } from './util.js';
+import { SWIPE_UP, SWIPE_DOWN, SWIPE_RIGHT, SWIPE_LEFT,
+         swipeDirection, swipeDistance } from './util.js';
 
 class Slider extends Component {
   static propTypes = {
@@ -169,8 +169,8 @@ class Slider extends Component {
         currX: posX,
         currY: posY,
         swipeLength: 0,
-        edgeEventFired: edgeEvent === undefined ? true : false,
-        swipeEventFired: swipeEvent === undefined ? true : false,
+        edgeEventFired: edgeEvent === undefined,
+        swipeEventFired: swipeEvent === undefined,
         minSwipe,
         maxSwipeLength
       }
@@ -220,21 +220,26 @@ class Slider extends Component {
       touchObject.swipeEventFired = true;
     }
 
-    const translateXOffset = vertical === false && touchMove === true ?
-      ((touchObject.currX - touchObject.startX) * 100 * edgeFriction) / touchObject.maxSwipeLength : 0;
-    const translateYOffset = vertical === true && touchMove === true ?
-      ((touchObject.currY - touchObject.startY) * 100 * edgeFriction) / touchObject.maxSwipeLength : 0;
+    const translateXOffset = vertical === false && touchMove === true
+      ? ((touchObject.currX - touchObject.startX) * 100 * edgeFriction) / touchObject.maxSwipeLength
+      : 0;
+    const translateYOffset = vertical === true && touchMove === true
+      ? ((touchObject.currY - touchObject.startY) * 100 * edgeFriction) / touchObject.maxSwipeLength
+      : 0;
 
     // FIXME PERFORMANCE BOTTLENECK
     this.setState({
-      touchObject: {...touchObject},
+      touchObject: { ...touchObject },
       translateXOffset,
       translateYOffset
     });
 
     // Don't cancel scrolling in the cross-axis to the slider
-    const verticalScroll = vertical === false && (direction === SWIPE_UP || direction === SWIPE_DOWN);
-    const horizontalScroll = vertical === true && (direction === SWIPE_LEFT || direction === SWIPE_RIGHT);
+    const verticalScroll =
+          vertical === false && (direction === SWIPE_UP || direction === SWIPE_DOWN);
+    const horizontalScroll =
+          vertical === true && (direction === SWIPE_LEFT || direction === SWIPE_RIGHT);
+
     if (verticalScroll || horizontalScroll) {
       return;
     }
@@ -278,10 +283,19 @@ class Slider extends Component {
   }
 
   render() {
-    const { children, vertical, infinite, swipe, draggable } = this.props;
-    const { transitionSpeed, transitionTimingFn } = this.props;
-    const { beforeChange, afterChange } = this.props;
-    const [ leftArrow, slides, rightArrow, customComponent ] = children;
+    const {
+      transitionSpeed,
+      transitionTimingFn,
+      beforeChange,
+      afterChange,
+      children,
+      vertical,
+      infinite,
+      swipe,
+      draggable,
+      ...props,
+     } = this.props;
+    const [leftArrow, slides, rightArrow, customComponent] = children;
     const { currentSlide, translateXOffset, translateYOffset } = this.state;
     const slideCount = Children.count(slides.props.children);
 
@@ -336,8 +350,8 @@ class Slider extends Component {
     }) : null;
 
     return (
-      <div>
-        <div ref="slider" style={{ display: 'flex', alignItems: 'center'}}>
+      <div {...props}>
+        <div ref="slider" style={{ display: 'flex', alignItems: 'center' }}>
           {newLeftArrow}
           {newSlides}
           {newRightArrow}

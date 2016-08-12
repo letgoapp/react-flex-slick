@@ -1,42 +1,42 @@
-import React, { Component, PropTypes } from 'react';
-
+import React, { PropTypes } from 'react';
 const range = n => [...Array(n)].map((_, i) => i);
 
-class Dots extends Component {
-  static propTypes = {
-    className: PropTypes.string,
-    currentSlide: PropTypes.number,
-    slideCount: PropTypes.number,
-    handleSlideShift: PropTypes.func,
-    style: PropTypes.object,
-  }
+const sx = {
+  display: 'flex',
+  justifyContent: 'center'
+};
 
-  render() {
-    const { className, slideCount, currentSlide, style } = this.props;
-    const dotStyle = { display: 'flex', justifyContent: 'center'};
-    const mergedStyle = Object.assign({}, dotStyle, style);
+const Dots = ({ activeClassName, slideCount, currentSlide, onClick, style }) =>
+  <div
+    style={{
+      ...sx,
+      ...style
+    }}
+  >
+    {range(slideCount).map((x, i) =>
+      <div
+        className={i === currentSlide ? activeClassName : ''}
+        onClick={() => onClick(i - currentSlide)}
+        style={{
+          width: 8,
+          height: 8,
+          borderRadius: 8,
+          backgroundColor: 'black',
+          opacity: i === currentSlide ? 1 : 0.2,
+          margin: 3
+        }}
+        key={i}
+      />
+    )}
+  </div>;
 
-    const dots = range(slideCount).map((x, i) => {
-      const isActive = i === currentSlide;
-      const style = {
-        width: 8,
-        height: 8,
-        borderRadius: 8,
-        backgroundColor: 'black',
-        opacity: isActive ? 1 : 0.2,
-        margin: 3
-      };
-
-      return (
-        <div className={isActive ? 'active' : ''} style={style} key={i} />
-      );
-    });
-    return (
-      <div style={mergedStyle} className={className ? className : 'slick-dots'} >
-        {dots}
-      </div>
-    );
-  }
-}
+Dots.propTypes = {
+  className: PropTypes.string,
+  currentSlide: PropTypes.number,
+  activeClassName: PropTypes.string,
+  onClick: PropTypes.func,
+  slideCount: PropTypes.number,
+  style: PropTypes.object
+};
 
 export default Dots;
