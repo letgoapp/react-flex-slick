@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react';
 const range = n => [...Array(n)].map((_, i) => i);
+import prefixAll from 'inline-style-prefixer/static';
 
-const sx = {
+const sx = prefixAll({
   display: 'flex',
   justifyContent: 'center'
-};
+});
 
 const Dots = ({ activeClassName, slideCount, currentSlide, onClick, style }) =>
   <div

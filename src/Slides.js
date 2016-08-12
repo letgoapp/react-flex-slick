@@ -1,4 +1,5 @@
 import React, { Component, PropTypes, Children, cloneElement } from 'react';
+import prefixAll from 'inline-style-prefixer/static';
 
 
 const Page = (props) => {
@@ -108,7 +109,7 @@ class Track extends Component {
       `all ${transitionSpeed}ms ${transitionTimingFn}`;
     const flexDirection = vertical ? 'column' : 'row';
 
-    const trackStyle = {
+    let trackStyle = {
       width: trackWidth,
       height: trackHeight,
       display: 'flex',
@@ -117,6 +118,10 @@ class Track extends Component {
       transform: trackTransform,
       transition: trackTransition
     };
+
+    if (typeof document !== 'undefined') {
+      trackStyle = prefixAll(trackStyle);
+    }
 
     return trackStyle;
   }

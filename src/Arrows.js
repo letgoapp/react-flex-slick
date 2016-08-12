@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import prefixAll from 'inline-style-prefixer/static';
 
 function isActive(currentSlide, slideCount, infinite, next, prev) {
   if (next && currentSlide === 0 && infinite === false) {
@@ -10,11 +11,25 @@ function isActive(currentSlide, slideCount, infinite, next, prev) {
   return true;
 }
 
-const Arrow = ({ activeClassName, className, color, currentSlide, inactiveClassName, infinite, next, prev, size, slideCount, style, ...props }) => {
-  const adjustedClassName = isActive(currentSlide, slideCount, infinite, next, prev) ? activeClassName : inactiveClassName
-  const borderTopBottom = `solid ${size}px transparent`
-  const borderLeftRight = `solid ${size * 1.25}px ${color}`
-  const sx = {
+const Arrow = ({
+  activeClassName,
+  className,
+  color,
+  currentSlide,
+  inactiveClassName,
+  infinite,
+  next,
+  prev,
+  size,
+  slideCount,
+  style,
+  ...props }) => {
+  const adjustedClassName = isActive(currentSlide, slideCount, infinite, next, prev)
+    ? activeClassName
+    : inactiveClassName;
+  const borderTopBottom = `solid ${size}px transparent`;
+  const borderLeftRight = `solid ${size * 1.25}px ${color}`;
+  let sx = {
     ...(adjustedClassName !== '' ? {} : {
       width: 0,
       height: 0,
@@ -25,6 +40,8 @@ const Arrow = ({ activeClassName, className, color, currentSlide, inactiveClassN
     }),
     ...style
   };
+
+  sx = prefixAll(sx);
   return (
     <div
       {...props}
@@ -44,6 +61,7 @@ Arrow.propTypes = {
   next: PropTypes.bool,
   prev: PropTypes.bool,
   size: PropTypes.number,
+  slideCount: PropTypes.number,
   style: PropTypes.object
 };
 

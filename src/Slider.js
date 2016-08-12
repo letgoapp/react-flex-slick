@@ -1,6 +1,7 @@
 import React, { Component, PropTypes, cloneElement, Children } from 'react';
 import { SWIPE_UP, SWIPE_DOWN, SWIPE_RIGHT, SWIPE_LEFT,
          swipeDirection, swipeDistance } from './util.js';
+import prefixAll from 'inline-style-prefixer/static';
 
 class Slider extends Component {
   static propTypes = {
@@ -293,7 +294,7 @@ class Slider extends Component {
       infinite,
       swipe,
       draggable,
-      ...props,
+      ...props
      } = this.props;
     const [leftArrow, slides, rightArrow, customComponent] = children;
     const { currentSlide, translateXOffset, translateYOffset } = this.state;
@@ -349,9 +350,14 @@ class Slider extends Component {
       handleSlideShift: ::this.handleSlideShift
     }) : null;
 
+    const styles = prefixAll({
+      display: 'flex',
+      alignItems: 'center'
+    });
+
     return (
       <div {...props}>
-        <div ref="slider" style={{ display: 'flex', alignItems: 'center' }}>
+        <div ref="slider" style={styles}>
           {newLeftArrow}
           {newSlides}
           {newRightArrow}
