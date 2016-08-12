@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "lint": "eslint .",
-    "prepublish": "rm .babelrc && babel src --out-dir lib --stage 0 -L all && git checkout -- .",
+    "prepublish": "rm -rf lib/ && npm run build",
     "build": "babel -d lib/ src/"
   },
   "repository": {
