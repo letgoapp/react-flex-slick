@@ -7,29 +7,34 @@ const sx = prefixAll({
   justifyContent: 'center'
 });
 
-const Dots = ({ activeClassName, slideCount, currentSlide, onClick, style }) =>
-  <div
-    style={{
-      ...sx,
-      ...style
-    }}
-  >
-    {range(slideCount).map((x, i) =>
-      <div
-        className={i === currentSlide ? activeClassName : ''}
-        onClick={() => onClick(i - currentSlide)}
-        style={{
-          width: 8,
-          height: 8,
-          borderRadius: 8,
-          backgroundColor: 'black',
-          opacity: i === currentSlide ? 1 : 0.2,
-          margin: 3
-        }}
-        key={i}
-      />
-    )}
-  </div>;
+const Dots = ({ activeClassName, slideCount, currentSlide, onClick, style }) => {
+  console.log(slideCount);
+  return (
+    <div
+      style={{
+        ...sx,
+        ...style
+      }}
+    >
+      {range(slideCount).map((x, i) =>
+        <div
+          className={i === currentSlide ? activeClassName : ''}
+          onClick={() => onClick(i - currentSlide)}
+          style={{
+            width: 8,
+            height: 8,
+            borderRadius: 8,
+            backgroundColor: 'black',
+            opacity: i === currentSlide ? 1 : 0.2,
+            margin: 3
+          }}
+          key={i}
+        />
+      )}
+    </div>
+  );
+};
+
 
 Dots.propTypes = {
   className: PropTypes.string,
