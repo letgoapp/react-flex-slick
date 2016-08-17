@@ -130,13 +130,13 @@ class Track extends Component {
 
     const pageWidth = vertical ? '100%' : `${100 / totalCount}%`;
     const pageHeight = vertical ? `${100 / totalCount}%` : '100%';
-    const pageStyle = prefixAll({
+    const pageStyle = {
       width: pageWidth,
       height: pageHeight,
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center'
-    });
+    };
 
     return pageStyle;
   }
