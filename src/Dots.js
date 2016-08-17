@@ -29,7 +29,7 @@ const Dots = ({
           borderRadius: dotSize,
           backgroundColor: activeColor,
           opacity: i === currentSlide ? 1 : 0.2,
-          margin: dotSize / 2
+          margin: `10px ${dotSize / 2}`
         }}
         key={i}
       />
