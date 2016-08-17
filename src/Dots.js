@@ -42,7 +42,7 @@ Dots.propTypes = {
   activeClassName: PropTypes.string,
   slideCount: PropTypes.number,
   activeColor: PropTypes.string,
-  dotSize: PropTypes.int,
+  dotSize: PropTypes.number,
   style: PropTypes.object
 };
 
