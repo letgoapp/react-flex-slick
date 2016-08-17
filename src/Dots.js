@@ -11,7 +11,6 @@ const Dots = ({
   activeClassName,
   slideCount,
   currentSlide,
-  onClick,
   activeColor,
   dotSize,
   style }) =>
@@ -24,7 +23,6 @@ const Dots = ({
     {range(slideCount).map((x, i) =>
       <div
         className={i === currentSlide ? activeClassName : ''}
-        onClick={() => onClick(i - currentSlide)}
         style={{
           width: dotSize,
           height: dotSize,
@@ -42,7 +40,6 @@ Dots.propTypes = {
   className: PropTypes.string,
   currentSlide: PropTypes.number,
   activeClassName: PropTypes.string,
-  onClick: PropTypes.func,
   slideCount: PropTypes.number,
   activeColor: PropTypes.string,
   dotSize: PropTypes.int,

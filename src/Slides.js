@@ -109,7 +109,7 @@ class Track extends Component {
       `all ${transitionSpeed}ms ${transitionTimingFn}`;
     const flexDirection = vertical ? 'column' : 'row';
 
-    let trackStyle = {
+    const trackStyle = prefixAll({
       width: trackWidth,
       height: trackHeight,
       display: 'flex',
@@ -117,11 +117,7 @@ class Track extends Component {
       flexShrink: 0,
       transform: trackTransform,
       transition: trackTransition
-    };
-
-    if (typeof document !== 'undefined') {
-      trackStyle = prefixAll(trackStyle);
-    }
+    });
 
     return trackStyle;
   }
@@ -134,13 +130,13 @@ class Track extends Component {
 
     const pageWidth = vertical ? '100%' : `${100 / totalCount}%`;
     const pageHeight = vertical ? `${100 / totalCount}%` : '100%';
-    const pageStyle = {
+    const pageStyle = prefixAll({
       width: pageWidth,
       height: pageHeight,
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center'
-    };
+    });
 
     return pageStyle;
   }
@@ -217,12 +213,12 @@ class Slides extends Component {
 
     const containerWidth = width === 0 ? '100%' : width;
     const containerHeight = height === 0 ? '100%' : height;
-    const containerStyle = {
+    const containerStyle = prefixAll({
       width: containerWidth,
       height: containerHeight,
       display: 'flex',
       overflow: 'hidden'
-    };
+    });
 
     return (
       <div
