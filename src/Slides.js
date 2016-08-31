@@ -1,5 +1,4 @@
 import React, { Component, PropTypes, Children, cloneElement } from 'react';
-import prefixAll from 'inline-style-prefixer/static';
 
 
 const Page = (props) => {
@@ -109,7 +108,7 @@ class Track extends Component {
       `all ${transitionSpeed}ms ${transitionTimingFn}`;
     const flexDirection = vertical ? 'column' : 'row';
 
-    const trackStyle = prefixAll({
+    const trackStyle = {
       width: trackWidth,
       height: trackHeight,
       display: 'flex',
@@ -117,7 +116,7 @@ class Track extends Component {
       flexShrink: 0,
       transform: trackTransform,
       transition: trackTransition
-    });
+    };
 
     return trackStyle;
   }
@@ -213,12 +212,12 @@ class Slides extends Component {
 
     const containerWidth = width === 0 ? '100%' : width;
     const containerHeight = height === 0 ? '100%' : height;
-    const containerStyle = prefixAll({
+    const containerStyle = {
       width: containerWidth,
       height: containerHeight,
       display: 'flex',
       overflow: 'hidden'
-    });
+    };
 
     return (
       <div
