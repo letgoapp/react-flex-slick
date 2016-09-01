@@ -23,6 +23,7 @@ const Arrow = ({
   size,
   slideCount,
   style,
+  children,
   ...props }) => {
   const adjustedClassName = isActive(currentSlide, slideCount, infinite, next, prev)
     ? activeClassName
@@ -47,7 +48,9 @@ const Arrow = ({
       {...props}
       className={`${adjustedClassName}${className ? ` ${className}` : ''}`}
       style={sx}
-    />
+    >
+      {children}
+    </div>
   );
 };
 
@@ -62,17 +65,18 @@ Arrow.propTypes = {
   prev: PropTypes.bool,
   size: PropTypes.number,
   slideCount: PropTypes.number,
-  style: PropTypes.object
+  style: PropTypes.object,
+  children: PropTypes.node
 };
 
 Arrow.defaultProps = {
   activeClassName: '',
-  color: '#795548',
+  color: '#fff',
   inactiveClassName: '',
-  size: 30
+  size: 20
 };
 
 const PrevArrow = (props) => <Arrow {...props} prev />;
 const NextArrow = (props) => <Arrow {...props} next />;
 
-export { PrevArrow, NextArrow };
+export { PrevArrow, NextArrow, Arrow };
