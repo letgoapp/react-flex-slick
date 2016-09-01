@@ -47,8 +47,8 @@
     "eslint-plugin-react": "^5.2.2",
     "express": "^4.13.3",
     "inline-style-prefixer": "^2.0.1",
-    "react": "^0.14.0-rc1",
-    "react-dom": "^0.14.0-rc1",
+    "react": "^15.3.1",
+    "react-dom": "^15.2.1",
     "react-transform-catch-errors": "1.0.0",
     "react-transform-hmr": "1.0.0",
     "redbox-react": "1.1.0",
@@ -56,9 +56,6 @@
     "webpack": "^1.12.2",
     "webpack-dev-middleware": "^1.2.0",
     "webpack-hot-middleware": "^2.2.0"
-  },
-  "peerDependencies": {
-    "react": ">=0.14 || ^0.14.0-alpha"
   },
   "npmName": "react-slick",
   "npmFileMap": [
