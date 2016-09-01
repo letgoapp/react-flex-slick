@@ -295,7 +295,16 @@ class Slider extends Component {
       swipe,
       draggable,
       ...props
-     } = this.props;
+    } = this.props;
+
+    // NOTE: from React 0.15 you need to delete custom props that are unused;
+    delete props.initialSlide;
+    delete props.edgeFriction;
+    delete props.touchThreshold;
+    delete props.touchMove;
+    delete props.autoPlay;
+    delete props.autoPlaySpeed;
+
     const [leftArrow, slides, rightArrow, customComponent] = children;
     const { currentSlide, translateXOffset, translateYOffset } = this.state;
     const slideCount = Children.count(slides.props.children);
@@ -304,20 +313,13 @@ class Slider extends Component {
 
     const newLeftArrow = leftArrow !== undefined ? cloneElement(leftArrow, {
       key: 0,
-      handleClick: () => { this.handleSlideShift(-1); },
-      onClick: () => { this.handleSlideShift(-1); },
-      currentSlide,
-      infinite
+      onClick: () => { this.handleSlideShift(-1); }
     }) : null;
 
     // Need to pass slideCount to check if end of slide has been reached.
     const newRightArrow = rightArrow !== undefined ? cloneElement(rightArrow, {
       key: 2,
-      handleClick: () => { this.handleSlideShift(1); },
-      onClick: () => { this.handleSlideShift(1); },
-      currentSlide,
-      infinite,
-      slideCount
+      onClick: () => { this.handleSlideShift(1); }
     }) : null;
 
     // TODO Show a warning if transitionSpeed prop is declared on Slides.
