@@ -9,6 +9,7 @@ const sx = prefixAll({
 
 const Dots = ({
   activeClassName,
+  className,
   slideCount,
   currentSlide,
   activeColor,
@@ -19,6 +20,7 @@ const Dots = ({
       ...sx,
       ...style
     }}
+    className={className}
   >
     {range(slideCount).map((x, i) =>
       <div
