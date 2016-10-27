@@ -48,6 +48,9 @@ const Arrow = ({
   };
 
   sx = prefixAll(sx);
+
+  console.log(sx.display);
+
   return (
     <div
       {...props}
