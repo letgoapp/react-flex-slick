@@ -30,6 +30,10 @@ const Arrow = ({
     : inactiveClassName;
   const borderTopBottom = `solid ${size}px transparent`;
   const borderLeftRight = `solid ${size * 1.25}px ${color}`;
+  const display = (prev && currentSlide === 0 && !infinite || next && currentSlide === slideCount && !infinite) // eslint-disable-line
+  ? 'none'
+  : 'block';
+
   let sx = {
     ...(adjustedClassName !== '' ? {} : {
       width: 0,
@@ -37,7 +41,8 @@ const Arrow = ({
       borderBottom: borderTopBottom,
       borderTop: borderTopBottom,
       borderRight: prev && borderLeftRight,
-      borderLeft: next && borderLeftRight
+      borderLeft: next && borderLeftRight,
+      display
     }),
     ...style
   };
