@@ -313,13 +313,13 @@ class Slider extends Component {
 
     const newLeftArrow = leftArrow !== undefined ? cloneElement(leftArrow, {
       key: 0,
-      onClick: () => { this.handleSlideShift(-1); }
+      onTouchTap: () => { this.handleSlideShift(-1); }
     }) : null;
 
     // Need to pass slideCount to check if end of slide has been reached.
     const newRightArrow = rightArrow !== undefined ? cloneElement(rightArrow, {
       key: 2,
-      onClick: () => { this.handleSlideShift(1); }
+      onTouchTap: () => { this.handleSlideShift(1); }
     }) : null;
 
     // TODO Show a warning if transitionSpeed prop is declared on Slides.
