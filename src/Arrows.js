@@ -30,11 +30,9 @@ const Arrow = ({
     : inactiveClassName;
   const borderTopBottom = `solid ${size}px transparent`;
   const borderLeftRight = `solid ${size * 1.25}px ${color}`;
-  const display = (prev && currentSlide === 0 && !infinite || next && currentSlide === slideCount && !infinite) // eslint-disable-line
+  const display = (prev && currentSlide === 0 || next && currentSlide === slideCount) // eslint-disable-line
   ? 'none'
   : 'block';
-
-  console.log(display);
 
   let sx = {
     ...(adjustedClassName !== '' ? {} : {
