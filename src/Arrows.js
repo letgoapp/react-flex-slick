@@ -34,6 +34,8 @@ const Arrow = ({
   ? 'none'
   : 'block';
 
+  console.log(display);
+
   let sx = {
     ...(adjustedClassName !== '' ? {} : {
       width: 0,
