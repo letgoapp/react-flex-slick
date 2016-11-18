@@ -8,17 +8,18 @@ const swipeDirection = touchObject => {
 
   const deltaX = currX - startX;
   const deltaY = currY - startY;
-
+  let direction;
   const angle = (Math.atan2(deltaY, deltaX) * 180) / Math.PI;
   if (angle < 45 && angle > -45) {
-    return SWIPE_RIGHT;
+    direction = SWIPE_RIGHT;
   } else if ((angle <= 180 && angle > 135) || (angle < -135 && angle > -180)) {
-    return SWIPE_LEFT;
-  } else if (angle > 45 && angle < 135 ) {
-    return SWIPE_DOWN;
-  } else if (angle < -45 && angle > -135 ) {
-    return SWIPE_UP;
+    direction = SWIPE_LEFT;
+  } else if (angle > 45 && angle < 135) {
+    direction = SWIPE_DOWN;
+  } else if (angle < -45 && angle > -135) {
+    direction = SWIPE_UP;
   }
+  return direction;
 };
 
 const swipeDistance = touchObject => {

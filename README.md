@@ -1,6 +1,6 @@
 React Flex Slick
 ================
-
+dummy update 
 This is library aims to replace [react-slick][react-slick].
 
 Uses **flexbox** exclusively, so no support for older browsers :cry: :cry:

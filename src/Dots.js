@@ -1,42 +1,56 @@
-import React, { Component, PropTypes } from 'react';
-
+import React, { PropTypes } from 'react';
 const range = n => [...Array(n)].map((_, i) => i);
+import prefixAll from 'inline-style-prefixer/static';
 
-class Dots extends Component {
-  static propTypes = {
-    className: PropTypes.string,
-    currentSlide: PropTypes.number,
-    slideCount: PropTypes.number,
-    handleSlideShift: PropTypes.func,
-    style: PropTypes.object,
-  }
+const sx = prefixAll({
+  display: 'flex',
+  justifyContent: 'center'
+});
 
-  render() {
-    const { className, slideCount, currentSlide, style } = this.props;
-    const dotStyle = { display: 'flex', justifyContent: 'center'};
-    const mergedStyle = Object.assign({}, dotStyle, style);
+const Dots = ({
+  activeClassName,
+  className,
+  slideCount,
+  currentSlide,
+  activeColor,
+  dotSize,
+  style }) =>
+  <div
+    style={{
+      ...sx,
+      ...style
+    }}
+    className={className}
+  >
+    {range(slideCount).map((x, i) =>
+      <div
+        className={i === currentSlide ? activeClassName : ''}
+        style={{
+          width: dotSize,
+          height: dotSize,
+          borderRadius: dotSize,
+          backgroundColor: activeColor,
+          opacity: i === currentSlide ? 1 : 0.2,
+          margin: `10px ${dotSize / 2}`
+        }}
+        key={i}
+      />
+    )}
+  </div>;
 
-    const dots = range(slideCount).map((x, i) => {
-      const isActive = i === currentSlide;
-      const style = {
-        width: 8,
-        height: 8,
-        borderRadius: 8,
-        backgroundColor: 'black',
-        opacity: isActive ? 1 : 0.2,
-        margin: 3
-      };
+Dots.propTypes = {
+  className: PropTypes.string,
+  currentSlide: PropTypes.number,
+  activeClassName: PropTypes.string,
+  slideCount: PropTypes.number,
+  activeColor: PropTypes.string,
+  dotSize: PropTypes.number,
+  style: PropTypes.object
+};
 
-      return (
-        <div className={isActive ? 'active' : ''} style={style} key={i} />
-      );
-    });
-    return (
-      <div style={mergedStyle} className={className ? className : 'slick-dots'} >
-        {dots}
-      </div>
-    );
-  }
-}
+Dots.defaultProps = {
+  activeColor: '#000',
+  dotSize: 8
+};
 
 export default Dots;
