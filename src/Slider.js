@@ -304,6 +304,7 @@ class Slider extends Component {
     delete props.touchMove;
     delete props.autoPlay;
     delete props.autoPlaySpeed;
+    delete props.currentSlide;
 
     const [leftArrow, slides, rightArrow, customComponent] = children;
     const { currentSlide, translateXOffset, translateYOffset } = this.state;
