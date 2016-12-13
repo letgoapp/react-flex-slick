@@ -105,7 +105,7 @@ class Track extends Component {
       infinite === true && ((previousSlide === -1 && (currentSlide === slideCount - 1)) ||
       ((previousSlide === slideCount) && currentSlide === 0)) ||
       (translateXOffset !== 0 || translateYOffset !== 0) ? '' :
-      `all ${transitionSpeed}ms ${transitionTimingFn}`;
+      `-moz-transform ${transitionSpeed}ms ${transitionTimingFn}`;
     const flexDirection = vertical ? 'column' : 'row';
 
     const trackStyle = {
