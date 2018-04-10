@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import prefixAll from 'inline-style-prefixer/static';
 
 function isActive(currentSlide, slideCount, infinite, next, prev) {
