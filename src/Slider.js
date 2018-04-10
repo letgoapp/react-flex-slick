@@ -1,4 +1,5 @@
-import React, { Component, PropTypes, cloneElement, Children } from 'react';
+import React, { Component, cloneElement, Children } from 'react';
+import PropTypes from 'prop-types';
 import { SWIPE_UP, SWIPE_DOWN, SWIPE_RIGHT, SWIPE_LEFT,
          swipeDirection, swipeDistance } from './util.js';
 import prefixAll from 'inline-style-prefixer/static';

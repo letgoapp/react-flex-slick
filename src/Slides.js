@@ -1,5 +1,5 @@
-import React, { Component, PropTypes, Children, cloneElement } from 'react';
-
+import React, { Component, Children, cloneElement } from 'react';
+import PropTypes from 'prop-types';
 
 const Page = (props) => {
   const { pageStyle, className } = props;
